@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="Theme.Novoda" parent="@android:style/Theme.Holo.Light">
+    <item name="android:actionBarStyle">@style/novoda_ActionBar</item>
+  </style>
+
+  <style name="novoda_ActionBar" parent="@android:style/Widget.ActionBar">
+    <item name="android:icon">@drawable/ic_launcher</item>
+    <item name="android:background">@color/novoda_green</item>
+  </style>
+
+</resources>
