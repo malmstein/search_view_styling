@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
             Field searchField = SearchView.class.getDeclaredField("mCloseButton");
             searchField.setAccessible(true);
             ImageView closeBtn = (ImageView) searchField.get(searchView);
-            closeBtn.setImageResource(R.drawable.action_search);
+            closeBtn.setImageResource(R.drawable.action_cancel);
 
         } catch (NoSuchFieldException e) {
             Log.e("SearchView", e.getMessage(), e);
@@ -123,5 +123,27 @@ public class MainActivity extends Activity {
             Log.e("SearchView", e.getMessage(), e);
         }
     }
+
+//    private void setSearchIconsWithActionBarSherlock(SearchView searchView) {
+//        try {
+//            Field searchField = SearchView.class.getDeclaredField("mCloseButton");
+//            searchField.setAccessible(true);
+//            ImageView closeBtn = (ImageView) searchField.get(searchView);
+//            closeBtn.setImageResource(R.drawable.ic_menu_cancel);
+//
+//            searchField = SearchView.class.getDeclaredField("mVoiceButton");
+//            searchField.setAccessible(true);
+//            ImageView voiceBtn = (ImageView) searchField.get(searchView);
+//            voiceBtn.setImageResource(R.drawable.ic_menu_voice_input);
+//
+//            ImageView searchButton = (ImageView) searchView.findViewById(R.id.abs__search_button);
+//            searchButton.setImageResource(R.drawable.ic_menu_search);
+//
+//        } catch (NoSuchFieldException e) {
+//            Log.e("SearchView", e.getMessage(), e);
+//        } catch (IllegalAccessException e) {
+//            Log.e("SearchView", e.getMessage(), e);
+//        }
+//    }
 
 }
