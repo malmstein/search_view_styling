@@ -18,9 +18,16 @@ package com.novoda.example.actionbarstyling.searchview;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.SearchView;
+
+import java.lang.reflect.Field;
 
 /**
  * This example illustrates a common usage of the DrawerLayout widget
@@ -63,6 +70,12 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+
+        setSearchTextColour(searchView);
+        setCloseSearchIcon(searchView);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -83,6 +96,32 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void setSearchTextColour(SearchView searchView) {
+        int searchPlateId = searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        EditText searchPlate = (EditText) searchView.findViewById(searchPlateId);
+        searchPlate.setTextColor(getResources().getColor(R.color.novoda_blue));
+//        searchPlate.setBackgroundResource(R.drawable.edit_text_holo_light);
+        searchPlate.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+    }
 
+//    private void setSearchTextColourWithActionBarSherlock(SearchView searchView) {
+//        AutoCompleteTextView searchPlate = (AutoCompleteTextView) searchView.findViewById(R.id.abs__search_src_text);
+//        searchPlate.setTextColor(getResources().getColor(R.color.novoda_blue));
+//        searchPlate.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+//    }
+
+    private void setCloseSearchIcon(SearchView searchView) {
+        try {
+            Field searchField = SearchView.class.getDeclaredField("mCloseButton");
+            searchField.setAccessible(true);
+            ImageView closeBtn = (ImageView) searchField.get(searchView);
+            closeBtn.setImageResource(R.drawable.action_search);
+
+        } catch (NoSuchFieldException e) {
+            Log.e("SearchView", e.getMessage(), e);
+        } catch (IllegalAccessException e) {
+            Log.e("SearchView", e.getMessage(), e);
+        }
+    }
 
 }
